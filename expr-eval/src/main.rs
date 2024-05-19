@@ -19,7 +19,6 @@ impl Display for ExprError {
     }
 }
 
-
 //  自定义 result类型
 pub type Result<T> = std::result::Result<T, ExprError>;
 
@@ -35,7 +34,6 @@ enum Token {
     LeftParen,  // 左括号
     RightParen, // 右括号
 }
-
 
 // 左结合
 const ASSOC_LEFT: i32 = 0;
@@ -66,7 +64,7 @@ impl Token {
     fn is_operator(&self) -> bool {
         match self {
             Token::Plus | Token::Minus | Token::Multiply | Token::Divide | Token::Power => true,
-            _ => false
+            _ => false,
         }
     }
 
@@ -187,10 +185,7 @@ impl<'a> Expr<'a> {
     pub fn eval(&mut self) -> Result<i32> {
         let result = self.compute_expr(1)?;
         // 如果还有 Token 没有处理，说明表达式存在错误
-        if self.
-            iter.
-            peek().
-            is_some() {
+        if self.iter.peek().is_some() {
             return Err(ExprError::Parse("Unexpected end of expr".into()));
         }
         Ok(result)
